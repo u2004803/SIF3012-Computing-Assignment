@@ -1,0 +1,89 @@
+#Importing Library
+%matplotlib inline
+from ipywidgets import interactive
+import matplotlib.pyplot as plt
+from mpl_toolkits import mplot3d
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+a = 0.25
+b = 4
+G = 1
+
+
+def fx(x, y, z, t, F):
+    dxdt = -y**2 - z**2 - a*x + a*F
+    return dxdt
+
+def fy(x, y, z, t):
+    dydt = x*y - b*x*z - y + G
+    return dydt
+
+def fz(x, y, z, t):
+    dzdt = b*x*y + x*z - z
+    return dzdt
+    
+def RungeKutta4(x,y,z,fx,fy,fz,t, h,F):
+    #Working for k1
+    k1x = h*fx(x,y,z,t,F)
+    k1y = h*fy(x,y,z,t)
+    k1z = h*fz(x,y,z,t)
+
+    #Working for k2
+    k2x = h*fx(x+k1x/2,y+k1y/2,z+k1z/2,t+h/2,F)
+    k2y = h*fy(x+k1x/2,y+k1y/2,z+k1z/2,t+h/2)
+    k2z = h*fz(x+k1x/2,y+k1y/2,z+k1z/2,t+h/2)
+    
+    
+    #Working for k3
+    k3x = h*fx(x+k2x/2,y+k2y/2,z+k2z/2,t+h/2,F)
+    k3y = h*fy(x+k2x/2,y+k2y/2,z+k2z/2,t+h/2)
+    k3z = h*fz(x+k2x/2,y+k2y/2,z+k2z/2,t+h/2)
+
+    #Working for k3\4
+    k4x = h*fx(x+k3x,y+k3y,z+k3z,t+h,F)
+    k4y = h*fy(x+k3x,y+k3y,z+k3z,t+h)
+    k4z = h*fz(x+k3x,y+k3y,z+k3z,t+h)
+
+    #Return in the form of general equation for 3D
+    return x+(k1x+2*k2x+2*k3x+k4x)/6, y+(k1y+2*k2y+2*k3y+k4y)/6, z+(k1z+2*k2z+2*k3z+k4z)/6
+
+
+def sim(F, t):
+  #Defining constants
+  F = F
+  tIn   = 0.        #Initial step value
+  tFin  = float(t)  #Final step value
+  h     = 0.01      #Step increment value
+  totalSteps = int(np.floor((tFin-tIn)/h))    #Calculation of total number of steps
+
+  #Generate arrays of complete 0 value
+  t = totalSteps * [0.0]
+  x = totalSteps * [0.0]
+  y = totalSteps * [0.0]
+  z = totalSteps * [0.0]
+
+
+  x[0],y[0],z[0],t[0] = 1., 1., 1., 0.  #Defining initial values for Lorenz System
+
+  #Iterations of Runge-Kutta 4th-Order Method to solve for Lorenz Model
+  for i in range(1, totalSteps):
+    x[i],y[i],z[i] = RungeKutta4(x[i-1],y[i-1],z[i-1], fx,fy,fz, t[i-1],h, F)
+  
+  #print(x)
+  #print(y)
+  #print(z)
+  fig = plt.figure(figsize = (10,10))
+  ax = plt.axes(projection='3d')
+  ax.plot3D(x, y, z)
+  ax.set_title('General Circulation Simulation')
+
+  # Set axes label
+  ax.set_xlabel('x', labelpad=20)
+  ax.set_ylabel('y', labelpad=20)
+  ax.set_zlabel('z', labelpad=20)
+  plt.show()
+
+
+interactive(sim, F = (0,10.0,0.1), t = (0,60,0.01))
