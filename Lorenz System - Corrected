@@ -1,3 +1,56 @@
+#Simulation of Chaotic Behaviour of General Circulation using Lorenz Attractor with Runge-Kutta 4th Model
+
+This project aims to perform simulation of the chaotic behaviour of the general atmospheric circulation using Lorenz Attractor, where the Lorenz Attractor will be attained using Runge-Kutta 4th Model. There are 3 concepts required to be understood for the simulation:
+
+1. Runge Kutta 4th-Order Method
+2. Lorenz System
+3. Lorenz System in General Atmospheric Circulation
+
+
+#1. Runge-Kutta 4th-Order Method
+
+Runge-Kutta is a numerical method employed to solve first-order ordinary differential equations (ODE) at high accuracy while avoid tedious calculations. Runge-Kutta method coordinates with Taylor Series up to the term in $h_r$ where r varies from method to method provides approximate value of y at a given point x.
+
+For Runge-Kutta 4th-order method (RK4), the general equation is provided as:
+
+$y_{i+1}$ = $y_i$ + $\frac{1}{6}$$(k_1 + 2k_2 + 2k_3 + k_4)$
+
+Where
+
+k1 : $hf(x_i,y_i)$
+
+k2 : $hf(x_i + (\frac{1}{2})h,y_i + (\frac{1}{2})k_1)$
+
+k3 : $hf(x_i + (\frac{1}{2})h,y_i + (\frac{1}{2})k_2)$
+
+k4 : $hf(x_i + h,y_i + k_3)$
+
+
+
+#2. Lorenz System
+
+Lorenz system is a system of Ordinary Differential Equations(ODE), which has characteristics of having chaotic solutions with different parameter value and initial conditions.
+
+
+Lorenz system was first studied and demonstrated Edward Lorenz in 1963 in the process of developing numerical simulations for simplified mathematical model for atmospheric convection.
+
+For a 3D-space, Lorenz system can be differentiated into 3 differential equations to account for each dimensional axis with respect to their time evolution as stated below:
+
+$\frac{dx}{dt} = σ(y-x)$
+
+$\frac{dy}{dt} = x(\rho - z) - y$
+
+$\frac{dz}{dt} = xy - \beta z$
+
+Where $\sigma,  \rho$  and $\phi$ are parameter values for the system, proportional to the Prandtl number, Rayleigh number, and certain physical dimensions of the layer itself
+
+The code below will showcase the simulation of Lorenz system and showing its chaotic characteristics under different initial conditions and parametric values
+
+
+
+
+
+
 #Importing Library
 %matplotlib inline
 from ipywidgets import interactive
@@ -47,6 +100,18 @@ def RungeKutta4(x,y,z,fx,fy,fz,t,h,s,r,b):
 
     #Return in the form of general equation for 3D
     return x+(k1x+2*k2x+2*k3x+k4x)/6, y+(k1y+2*k2y+2*k3y+k4y)/6, z+(k1z+2*k2z+2*k3z+k4z)/6
+
+
+Here the symbol were explained as below:
+
+$σ$ : sigma
+
+$β$ : beta
+
+$ρ$ : rho
+
+
+Now we showcase the effect of initial conditions and parametric value towards the evolution of the Lorenz Model
 
 
 def sim(sigma, beta, rho, t):
