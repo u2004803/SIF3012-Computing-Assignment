@@ -1,10 +1,11 @@
 # SIF3012-Computing-Assignment
 The project is dedicated for computing assignment of SIF3012 which is titled "Simulation of Chaotic Behaviour of Atmospheric Circulation Using Lorenz Model with Runge-Kutta 4th-Order"
 
+This project contains two Google Collab files, with file names and purposes listed below:
+1) SIF3012_New_Lorenz.ipynb: 
+This code shows an introduction to solving Lorenz System using numerical method, before going into chaotic behavior.
+Link to the code: https://colab.research.google.com/github/u2004803/SIF3012-Computing-Assignment/blob/main/SIF3012_New_Lorenz.ipynb
 
-Lorenz System : The code is more or less completed, maybe can work on manipulation of initial coordinates with fixed parameter values (sigma, beta, rho) and check if there is any significant shape/pattern existed (2 circles)
-
-Chaotic Behaviour : I have also completed the code with only changing the timestep and F value for the plot, now only need to work on the explanation. Precaution is the result here may vary from the paper since the paper used 6th order Runge Kutta while we used 4th order Runge-Kutta
-
-Link to the Code on Google Collab:
-https://colab.research.google.com/drive/11SNMUXbXnnNE6VrWf5wScKufDlS4TG4t?usp=sharing 
+2) SIF3012_Simulation_of_General_Circulation_Chaotic_Behaviour_using_Lorenz_Attractor.ipynb:
+This code demostrates the numerical solution to showing the chaotic behaviour of general atmospheric circulation using Lorenz System 
+Link to the code: https://colab.research.google.com/github/u2004803/SIF3012-Computing-Assignment/blob/main/SIF3012_Simulation_of_General_Circulation_Chaotic_Behaviour_using_Lorenz_Attractor.ipynb
